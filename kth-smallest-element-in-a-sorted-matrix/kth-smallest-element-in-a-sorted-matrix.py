@@ -1,8 +1,30 @@
+import heapq
 class Solution:
     def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
+        return self.heap_sol(matrix,k)
+    
+    
+    def heap_sol(self,lists,k):
+        h = []
+        for i,l in enumerate(lists):
+            if l:
+                h.append((l[0],i,0))
+        heapq.heapify(h)
+        cur=0
+        small = 0
+        while cur<k:
+            cur+=1
+            val,i1,i2 = heapq.heappop(h)
+            small = val
+            if len(lists[i1]) > i2+1:
+                heapq.heappush(h,(lists[i1][i2+1],i1,i2+1))
+        return small
+
+    
+    def kthSmallest_1(self, matrix: List[List[int]], k: int) -> int:
         sortlist = self.mergeKLists(matrix)
-        return sortlist[k-1]
-        
+        return sortlist[k-1]    
+
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
         length = len(lists)
         interval= 1
