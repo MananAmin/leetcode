@@ -3,8 +3,32 @@
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
+
+import heapq
+
 class Solution:
+    ListNode.__eq__ = lambda self, other: self.val == other.val
+    ListNode.__lt__ = lambda self, other: self.val < other.val
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        return self.heap_sol(lists)
+        
+    def heap_sol(self,lists):
+        h = []
+        dummy = ListNode(-1)
+        cur = dummy
+        for p in lists:
+            if p:
+                heapq.heappush(h, p)
+        # print(h)
+        while h:
+            cur.next =  heapq.heappop(h)
+            cur = cur.next
+            if cur and cur.next:
+                heapq.heappush(h,cur.next)
+        return dummy.next
+
+
+    def mergeKLists_sol(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
         length = len(lists)
         interval= 1
         while interval < length:
