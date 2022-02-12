@@ -12,7 +12,7 @@ class Solution:
         left =0
         right =1
         
-        while left< size and right<size:
+        while right<size:
             
             if prices[right]<prices[left]:
                 left = right
