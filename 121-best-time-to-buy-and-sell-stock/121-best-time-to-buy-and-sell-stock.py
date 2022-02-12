@@ -4,8 +4,25 @@ class Solution:
         if len(prices)==1:
             return 0
         
-        return self.solution(prices)
+        return self.best(prices)
+    
+    def best(self,prices):
+        ans = 0
+        size = len(prices)
+        left =0
+        right =1
         
+        while left< size and right<size:
+            
+            if prices[right]<prices[left]:
+                left = right
+            elif prices[right]-prices[left]>ans:
+                ans = prices[right]-prices[left]
+                right+=1
+            else:
+                right+=1
+        return ans
+    
     def solution(self,prices):
         ans = 0
         size = len(prices)
