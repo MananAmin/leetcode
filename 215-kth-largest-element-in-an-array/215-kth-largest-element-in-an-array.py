@@ -3,7 +3,7 @@ from queue import PriorityQueue
 
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
-        return self.another(nums,k)
+        return self.heap_sol(nums,k)
     
     def another(self,nums,k):
         
@@ -31,4 +31,12 @@ class Solution:
             ans = pq.get()
             
         return ans*-1
+    
+    def heap_sol(self,nums,k):
+        pq = nums[:k]
+        heapq.heapify(pq)
+        for x in nums[k:]:
+            heapq.heappush(pq, x)
+            heapq.heappop(pq)
+        return pq[0]
         
