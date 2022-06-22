@@ -3,7 +3,7 @@ from queue import PriorityQueue
 
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
-        return self.heap_sol(nums,k)
+        return self.another(nums,k)
     
     def another(self,nums,k):
         
@@ -13,11 +13,8 @@ class Solution:
             if index <k:
                 pq.put(num)
             else:
-                temp = pq.get()
-                if temp> num:
-                    pq.put(temp)
-                else:
-                    pq.put(num)      
+                pq.put(num)
+                pq.get()     
         return pq.get()
     
     def naive(self,nums,k):
